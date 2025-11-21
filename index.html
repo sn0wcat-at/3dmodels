@@ -23,24 +23,43 @@
         height: 100vh;
       }
 
-      /* ---------- SNOWFALL (Option 1) ---------- */
-.snow {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 60;
-  background-image:
-    radial-gradient(2px 2px at 20px 20px, #e8f5ff 50%, transparent 50%),
-    radial-gradient(3px 3px at 40px 60px, #e8f5ff 50%, transparent 50%),
-    radial-gradient(2px 2px at 80px 80px, #e8f5ff 50%, transparent 50%),
-    radial-gradient(3px 3px at 120px 20px, #e8f5ff 50%, transparent 50%),
-    radial-gradient(2px 2px at 160px 40px, #e8f5ff 50%, transparent 50%);
-  animation: snow 12s linear infinite;
-  opacity: 0.9;
-}
+      /* ---------- SNOWFALL ---------- */
+      .snow {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 60;
+        background-image:
+          radial-gradient(2px 2px at 20px 20px, #e8f5ff 50%, transparent 50%),
+          radial-gradient(3px 3px at 40px 60px, #e8f5ff 50%, transparent 50%),
+          radial-gradient(2px 2px at 80px 80px, #e8f5ff 50%, transparent 50%),
+          radial-gradient(3px 3px at 120px 20px, #e8f5ff 50%, transparent 50%),
+          radial-gradient(2px 2px at 160px 40px, #e8f5ff 50%, transparent 50%);
+        animation: snow 12s linear infinite;
+        opacity: 0.9;
+      }
+
+      @keyframes snow {
+        0% {
+          background-position: 
+            0px -100px, 
+            0px -200px, 
+            0px -150px, 
+            0px -300px, 
+            0px -250px;
+        }
+        100% {
+          background-position: 
+            0px 800px, 
+            0px 900px, 
+            0px 850px, 
+            0px 1000px, 
+            0px 950px;
+        }
+      }
 
       /* ---------- POEM OVERLAY ---------- */
       #poem-box {
@@ -67,7 +86,7 @@
         font-size: 14px;
       }
 
-      /* ---------- CLOSE BUTTON ---------- */
+      /* ---------- CLOSE POEM BUTTON ---------- */
       #close-poem {
         position: absolute;
         top: 10px;
@@ -98,25 +117,12 @@
         cursor: pointer;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
       }
-
-      /* ---------- DEVICE INSTRUCTIONS ---------- */
-      #instructions {
-        position: absolute;
-        bottom: 90px;
-        width: 100%;
-        text-align: center;
-        z-index: 120;
-        font-size: 14px;
-        color: #444;
-        padding: 0 20px;
-        pointer-events: none;
-      }
     </style>
   </head>
 
   <body>
 
-    <!-- SNOWFALL LAYER -->
+    <!-- SNOWFALL -->
     <div class="snow"></div>
 
     <!-- POEM OVERLAY -->
@@ -140,9 +146,6 @@
     <!-- CLOSE POEM BUTTON -->
     <button id="close-poem">Close</button>
 
-    <!-- DEVICE INSTRUCTIONS -->
-    <div id="instructions"></div>
-
     <!-- TAP FOR AR MAGIC BUTTON -->
     <button id="ar-button">Tap for AR Magic ✨</button>
 
@@ -163,30 +166,4 @@
     <!-- SCRIPTS -->
     <script>
       // CLOSE POEM
-      document.getElementById("close-poem").onclick = function () {
-        document.getElementById("poem-box").style.display = "none";
-        this.style.display = "none";
-      };
-
-      // PLATFORM INSTRUCTIONS
-      const userAgent = navigator.userAgent.toLowerCase();
-      const instructions = document.getElementById("instructions");
-
-      if (userAgent.includes("iphone") || userAgent.includes("ipad")) {
-        instructions.innerHTML =
-          "iPhone users: Open this page in Safari to view the AR experience.";
-      } else if (userAgent.includes("android")) {
-        instructions.innerHTML =
-          "Android users: Open this page in Chrome for the AR experience.";
-      } else {
-        instructions.innerHTML = "Mobile device recommended for AR.";
-      }
-
-      // TAP FOR AR MAGIC BUTTON
-      const viewer = document.getElementById("viewer");
-      document.getElementById("ar-button").onclick = () => {
-        viewer.activateAR();
-      };
-    </script>
-  </body>
-</html>
+      document.getElementByI
