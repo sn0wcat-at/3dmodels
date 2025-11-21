@@ -24,75 +24,33 @@
       }
 
  
-/* ---------- COZY SNOWSTORM (multi-layer FIXED) ---------- */
+/* ---------- SIMPLE SNOWFALL (reliable version) ---------- */
 .snow {
-  pointer-events: none;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 60;
-  overflow: hidden;
-  position: relative; /* REQUIRED FIX */
-}
-
-.snow:before,
-.snow:after,
-.snow div {
-  content: "";
-  position: absolute;
-  top: -10%;
-  left: 0;
-  width: 100%;
-  height: 120%;  /* ensures visibility */
   pointer-events: none;
-  background-repeat: repeat;
-}
-
-/* BACK LAYER */
-.snow:before {
+  z-index: 60;
   background-image:
-    radial-gradient(1.5px 1.5px, #dfe9f5 60%, transparent 40%),
-    radial-gradient(2px 2px, #dfe9f5 60%, transparent 40%);
-  animation: snowfall-back 18s linear infinite;
-  opacity: 0.7;
-}
-
-/* MID LAYER */
-.snow:after {
-  background-image:
-    radial-gradient(2.5px 2.5px, #e8f0ff 65%, transparent 35%),
-    radial-gradient(3px 3px, #e8f0ff 65%, transparent 35%);
-  animation: snowfall-mid 12s linear infinite;
-  opacity: 0.85;
-}
-
-/* FRONT LAYER */
-.snow div {
-  background-image:
-    radial-gradient(4px 4px, #f6fbff 70%, transparent 30%),
-    radial-gradient(5px 5px, #f6fbff 70%, transparent 30%);
-  animation: snowfall-front 8s linear infinite;
+      radial-gradient(2px 2px at 20px 20px, #e8f5ff 70%, transparent 30%),
+      radial-gradient(3px 3px at 40px 60px, #e8f5ff 70%, transparent 30%),
+      radial-gradient(2px 2px at 80px 80px, #e8f5ff 70%, transparent 30%),
+      radial-gradient(3px 3px at 120px 20px, #e8f5ff 70%, transparent 30%),
+      radial-gradient(2px 2px at 160px 40px, #e8f5ff 70%, transparent 30%);
+  animation: snow 12s linear infinite;
   opacity: 0.9;
 }
 
-@keyframes snowfall-back {
-  from { transform: translateY(-10%); }
-  to { transform: translateY(110%); }
+@keyframes snow {
+  0% {
+      background-position: 0px -200px, 0px -300px, 0px -250px, 0px -400px, 0px -350px;
+  }
+  100% {
+      background-position: 0px 900px, 0px 1000px, 0px 950px, 0px 1100px, 0px 1050px;
+  }
 }
-
-@keyframes snowfall-mid {
-  from { transform: translateY(-10%); }
-  to { transform: translateY(110%); }
-}
-
-@keyframes snowfall-front {
-  from { transform: translateY(-10%); }
-  to { transform: translateY(110%); }
-}
-
-
 
 
       /* ---------- POEM OVERLAY ---------- */
@@ -157,7 +115,7 @@
   <body>
 
   <!-- SNOWFALL (3-layer version) -->
-  <div class="snow"><div></div></div>
+<div class="snow"></div>
 
     <!-- POEM OVERLAY -->
     <div id="poem-box">
