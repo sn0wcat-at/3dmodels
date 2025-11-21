@@ -1,31 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Holiday AR Card</title>
 
     <!-- Load model-viewer -->
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@google/model-viewer/dist/model-viewer.min.js"
+    ></script>
 
     <style>
       body {
         margin: 0;
         background: #ffffff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
+        font-family: "Helvetica Neue", Arial, sans-serif;
       }
+
       model-viewer {
         width: 100%;
-        height: 100%;
+        height: 100vh;
+      }
+
+      /* ---------- POEM OVERLAY ---------- */
+      #poem-box {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 22px 20px 36px;
+        background: rgba(255, 255, 255, 0.96);
+        color: #333;
+        font-size: 16px;
+        line-height: 1.4;
+        text-align: center;
+        z-index: 100;
+        box-sizing: border-box;
+      }
+
+      #poem-box p {
+        margin: 0 0 10px;
+      }
+
+      #poem-box em {
+        font-style: italic;
+        font-size: 14px;
+      }
+
+      /* ---------- CLOSE BUTTON ---------- */
+      #close-poem {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 200;
+        padding: 8px 14px;
+        border: none;
+        background: #222;
+        color: #fff;
+        border-radius: 6px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+
+      /* ---------- TAP FOR AR MAGIC BUTTON ---------- */
+      #ar-button {
+        position: absolute;
+        bottom: 25px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 150;
+        padding: 14px 28px;
+        font-size: 18px;
+        border: none;
+        background: #d22b2b;
+        color: white;
+        border-radius: 30px;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+      }
+
+      /* ---------- DEVICE INSTRUCTIONS ---------- */
+      #instructions {
+        position: absolute;
+        bottom: 90px;
+        width: 100%;
+        text-align: center;
+        z-index: 120;
+        font-size: 14px;
+        color: #444;
+        padding: 0 20px;
+        pointer-events: none;
       }
     </style>
   </head>
 
   <body>
+    <!-- POEM OVERLAY -->
+    <div id="poem-box">
+      <p>We may be far this time of year,<br />
+      Yet tap this box, and we’ll all appear.<br />
+      A bit of magic wrapped in light,<br />
+      Carry our love into your sight.<br />
+      We’re miles apart, but not today—<br />
+      Along with AR to guide the way.</p>
+
+      <p>
+        <em
+          >Wishing you joy in the new year ahead,<br />with much love from<br />
+          Nathan, Dexter, Lani, Cat & Ed</em
+        >
+      </p>
+    </div>
+
+    <!-- CLOSE POEM BUTTON -->
+    <button id="close-poem">Close</button>
+
+    <!-- DEVICE INSTRUCTIONS -->
+    <div id="instructions"></div>
+
+    <!-- TAP FOR AR MAGIC BUTTON -->
+    <button id="ar-button">Tap for AR Magic ✨</button>
+
+    <!-- 3D MODEL VIEWER -->
     <model-viewer
+      id="viewer"
       src="2_15_2023.glb"
       ios-src="2_15_2023.usdz"
       alt="My 3D Model"
@@ -33,7 +132,35 @@
       ar-modes="webxr scene-viewer quick-look"
       ar-scale="auto"
       camera-controls
-      auto-rotate
-    ></model-viewer>
+      auto-rotate=""
+    >
+    </model-viewer>
+
+    <!-- SCRIPTS -->
+    <script>
+      // CLOSE POEM
+      document.getElementById("close-poem").onclick = function () {
+        document.getElementById("poem-box").style.display = "none";
+        this.style.display = "none";
+      };
+
+      // PLATFORM INSTRUCTIONS
+      const userAgent = navigator.userAgent.toLowerCase();
+      const instructions = document.getElementById("instructions");
+
+      if (userAgent.includes("iphone") || userAgent.includes("ipad")) {
+        instructions.innerHTML = "iPhone users: Open this page in Safari to view the AR experience.";
+      } else if (userAgent.includes("android")) {
+        instructions.innerHTML = "Android users: Open this page in Chrome for the AR experience.";
+      } else {
+        instructions.innerHTML = "Mobile device recommended for AR.";
+      }
+
+      // TAP FOR AR MAGIC BUTTON → triggers model-viewer AR mode
+      const viewer = document.getElementById("viewer");
+      document.getElementById("ar-button").onclick = () => {
+        viewer.activateAR();
+      };
+    </script>
   </body>
 </html>
