@@ -23,35 +23,43 @@
         height: 100vh;
       }
 
- 
-/* ---------- SIMPLE SNOWFALL (reliable version) ---------- */
-.snow {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 60;
-  background-image:
-      radial-gradient(2px 2px at 20px 20px, #e8f5ff 70%, transparent 30%),
-      radial-gradient(3px 3px at 40px 60px, #e8f5ff 70%, transparent 30%),
-      radial-gradient(2px 2px at 80px 80px, #e8f5ff 70%, transparent 30%),
-      radial-gradient(3px 3px at 120px 20px, #e8f5ff 70%, transparent 30%),
-      radial-gradient(2px 2px at 160px 40px, #e8f5ff 70%, transparent 30%);
-  animation: snow 12s linear infinite;
-  opacity: 0.9;
-}
+      /* ---------- SNOWFALL ---------- */
+      .snow {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 60;
+        background-image:
+          radial-gradient(2px 2px at 20px 20px, #e8f5ff 50%, transparent 50%),
+          radial-gradient(3px 3px at 40px 60px, #e8f5ff 50%, transparent 50%),
+          radial-gradient(2px 2px at 80px 80px, #e8f5ff 50%, transparent 50%),
+          radial-gradient(3px 3px at 120px 20px, #e8f5ff 50%, transparent 50%),
+          radial-gradient(2px 2px at 160px 40px, #e8f5ff 50%, transparent 50%);
+        animation: snow 12s linear infinite;
+        opacity: 0.9;
+      }
 
-@keyframes snow {
-  0% {
-      background-position: 0px -200px, 0px -300px, 0px -250px, 0px -400px, 0px -350px;
-  }
-  100% {
-      background-position: 0px 900px, 0px 1000px, 0px 950px, 0px 1100px, 0px 1050px;
-  }
-}
-
+      @keyframes snow {
+        0% {
+          background-position: 
+            0px -100px, 
+            0px -200px, 
+            0px -150px, 
+            0px -300px, 
+            0px -250px;
+        }
+        100% {
+          background-position: 
+            0px 800px, 
+            0px 900px, 
+            0px 850px, 
+            0px 1000px, 
+            0px 950px;
+        }
+      }
 
       /* ---------- POEM OVERLAY ---------- */
       #poem-box {
@@ -114,8 +122,8 @@
 
   <body>
 
-  <!-- SNOWFALL (3-layer version) -->
-<div class="snow"></div>
+    <!-- SNOWFALL -->
+    <div class="snow"></div>
 
     <!-- POEM OVERLAY -->
     <div id="poem-box">
@@ -155,19 +163,19 @@
     >
     </model-viewer>
 
-      <!-- SCRIPTS -->
-  <script>
-    // CLOSE POEM
-    document.getElementById("close-poem").onclick = function () {
-      document.getElementById("poem-box").style.display = "none";
-      this.style.display = "none";
-    };
+    <!-- SCRIPTS -->
+    <script>
+      // CLOSE POEM
+      document.getElementById("close-poem").onclick = function () {
+        document.getElementById("poem-box").style.display = "none";
+        this.style.display = "none";
+      };
 
-    // TAP FOR AR MAGIC BUTTON
-    const viewer = document.getElementById("viewer");
-    document.getElementById("ar-button").onclick = () => {
-      viewer.activateAR();
-    };
-  </script>
-
-</body>
+      // TAP FOR AR MAGIC BUTTON
+      const viewer = document.getElementById("viewer");
+      document.getElementById("ar-button").onclick = () => {
+        viewer.activateAR();
+      };
+    </script>
+  </body>
+</html>
