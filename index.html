@@ -23,6 +23,44 @@
         height: 100vh;
       }
 
+      /* ---------- SNOWFALL (Option 1) ---------- */
+      .snow {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 60;
+        background-image:
+          radial-gradient(2px 2px at 20px 20px, white 50%, transparent 50%),
+          radial-gradient(3px 3px at 40px 60px, white 50%, transparent 50%),
+          radial-gradient(2px 2px at 80px 80px, white 50%, transparent 50%),
+          radial-gradient(3px 3px at 120px 20px, white 50%, transparent 50%),
+          radial-gradient(2px 2px at 160px 40px, white 50%, transparent 50%);
+        animation: snow 12s linear infinite;
+        opacity: 0.9;
+      }
+
+      @keyframes snow {
+        0% {
+          background-position: 
+            0px -100px, 
+            0px -200px, 
+            0px -150px, 
+            0px -300px, 
+            0px -250px;
+        }
+        100% {
+          background-position: 
+            0px 800px, 
+            0px 900px, 
+            0px 850px, 
+            0px 1000px, 
+            0px 950px;
+        }
+      }
+
       /* ---------- POEM OVERLAY ---------- */
       #poem-box {
         position: absolute;
@@ -96,6 +134,10 @@
   </head>
 
   <body>
+
+    <!-- SNOWFALL LAYER -->
+    <div class="snow"></div>
+
     <!-- POEM OVERLAY -->
     <div id="poem-box">
       <p>We may be far this time of year,<br />
@@ -106,10 +148,11 @@
       Along with AR to guide the way.</p>
 
       <p>
-        <em
-          >Wishing you joy in the new year ahead,<br />with much love from<br />
-          Nathan, Dexter, Lani, Cat & Ed</em
-        >
+        <em>
+          Wishing you joy in the new year ahead,<br />
+          with much love from<br />
+          Nathan, Dexter, Lani, Cat & Ed
+        </em>
       </p>
     </div>
 
@@ -149,14 +192,16 @@
       const instructions = document.getElementById("instructions");
 
       if (userAgent.includes("iphone") || userAgent.includes("ipad")) {
-        instructions.innerHTML = "iPhone users: Open this page in Safari to view the AR experience.";
+        instructions.innerHTML =
+          "iPhone users: Open this page in Safari to view the AR experience.";
       } else if (userAgent.includes("android")) {
-        instructions.innerHTML = "Android users: Open this page in Chrome for the AR experience.";
+        instructions.innerHTML =
+          "Android users: Open this page in Chrome for the AR experience.";
       } else {
         instructions.innerHTML = "Mobile device recommended for AR.";
       }
 
-      // TAP FOR AR MAGIC BUTTON → triggers model-viewer AR mode
+      // TAP FOR AR MAGIC BUTTON
       const viewer = document.getElementById("viewer");
       document.getElementById("ar-button").onclick = () => {
         viewer.activateAR();
