@@ -153,8 +153,8 @@
 
   <body>
 
-    <!-- SNOWFALL -->
-    <div class="snow"></div>
+  <!-- SNOWFALL (3-layer version) -->
+  <div class="snow"><div></div></div>
 
     <!-- POEM OVERLAY -->
     <div id="poem-box">
@@ -194,7 +194,19 @@
     >
     </model-viewer>
 
-    <!-- SCRIPTS -->
-    <script>
-      // CLOSE POEM
-      document.getElementByI
+      <!-- SCRIPTS -->
+  <script>
+    // CLOSE POEM
+    document.getElementById("close-poem").onclick = function () {
+      document.getElementById("poem-box").style.display = "none";
+      this.style.display = "none";
+    };
+
+    // TAP FOR AR MAGIC BUTTON
+    const viewer = document.getElementById("viewer");
+    document.getElementById("ar-button").onclick = () => {
+      viewer.activateAR();
+    };
+  </script>
+
+</body>
