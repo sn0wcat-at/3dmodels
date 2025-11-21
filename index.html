@@ -24,7 +24,7 @@
       }
 
  
-/* ---------- COZY SNOWSTORM (multi-layer) ---------- */
+/* ---------- COZY SNOWSTORM (multi-layer FIXED) ---------- */
 .snow {
   pointer-events: none;
   position: fixed;
@@ -34,6 +34,7 @@
   height: 100%;
   z-index: 60;
   overflow: hidden;
+  position: relative; /* REQUIRED FIX */
 }
 
 .snow:before,
@@ -42,31 +43,32 @@
   content: "";
   position: absolute;
   top: -10%;
+  left: 0;
   width: 100%;
-  height: 100%;
+  height: 120%;  /* ensures visibility */
   pointer-events: none;
   background-repeat: repeat;
 }
 
-/* BACK LAYER: tiny soft snow */
+/* BACK LAYER */
 .snow:before {
   background-image:
     radial-gradient(1.5px 1.5px, #dfe9f5 60%, transparent 40%),
     radial-gradient(2px 2px, #dfe9f5 60%, transparent 40%);
   animation: snowfall-back 18s linear infinite;
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
-/* MID LAYER: medium-sized flakes */
+/* MID LAYER */
 .snow:after {
   background-image:
     radial-gradient(2.5px 2.5px, #e8f0ff 65%, transparent 35%),
     radial-gradient(3px 3px, #e8f0ff 65%, transparent 35%);
   animation: snowfall-mid 12s linear infinite;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
-/* FRONT LAYER: large, cozy flakes */
+/* FRONT LAYER */
 .snow div {
   background-image:
     radial-gradient(4px 4px, #f6fbff 70%, transparent 30%),
@@ -76,19 +78,20 @@
 }
 
 @keyframes snowfall-back {
-  0% { transform: translateY(-10%); }
-  100% { transform: translateY(110%); }
+  from { transform: translateY(-10%); }
+  to { transform: translateY(110%); }
 }
 
 @keyframes snowfall-mid {
-  0% { transform: translateY(-10%); }
-  100% { transform: translateY(110%); }
+  from { transform: translateY(-10%); }
+  to { transform: translateY(110%); }
 }
 
 @keyframes snowfall-front {
-  0% { transform: translateY(-10%); }
-  100% { transform: translateY(110%); }
+  from { transform: translateY(-10%); }
+  to { transform: translateY(110%); }
 }
+
 
 
 
